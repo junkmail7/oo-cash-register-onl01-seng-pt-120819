@@ -37,6 +37,7 @@ class CashRegister
       @total=@total-@prices.pop
     end
     if @prices.length == 1
+      @prices.pop
       @total = 0.0
     end
   end
