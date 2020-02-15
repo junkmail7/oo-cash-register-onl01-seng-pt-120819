@@ -1,20 +1,21 @@
 require 'pry'
 class CashRegister
-  attr_accessor :total, :discount, :items, :prices
+  attr_accessor :total, :discount, :items, :last_transaction
   
   def initialize(discount = 0)
   @total = 0
   @discount = discount
   @items=[]
-  @prices=[]
+  @last_transaction = 0
   end
   
   def add_item(title, price, quantity=1)
     @total+=price*quantity
     quantity.times do
     @items << title
-    @prices << price
+    
     end
+    @last_transaction = price*quantity
   end
   
   def apply_discount
@@ -33,12 +34,7 @@ class CashRegister
   
   def void_last_transaction
     #binding.pry
-    if @prices.length > 1
-      @total=@total-@prices.pop
-    end
-    if @prices.length == 1
-      @total = 0.0
-    end
+    @total=@total-last_transaction
   end
   
 end
